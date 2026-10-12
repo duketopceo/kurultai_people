@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="docs/logo.webp" alt="Kurultai Memory" width="120" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/wordmark-dark.svg">
+    <img alt="Kurultai Memory" src="assets/brand/wordmark.svg" height="48">
+  </picture>
 </p>
 
 # Kurultai Memory
@@ -7,6 +10,23 @@
 **Connect Agent Zero to your [Kurultai](https://github.com/duketopceo/kurultai) brain.**
 
 Search, recall, and cite indexed knowledge with excerpt-sized results and source paths — never whole-file dumps into context.
+
+> Logo is a proposal pending owner sign-off. Roadmap: [ROADMAP.md](ROADMAP.md) · Design: [DESIGN.md](DESIGN.md) · Landscape: [docs/research](docs/research/2026-10-10-landscape.md).
+
+## How it works
+
+```text
+Agent Zero agent --tool call--> kurultai_search | kurultai_recall | kurultai_cite
+        |                                   |
+   plugin settings  --- HTTP (and optional MCP) ---> Kurultai daemon :8421
+                                            hybrid FTS + vector hits -> excerpts + source paths
+```
+
+Read-only: the plugin never writes to Kurultai. Query routing between search and recall is heuristic (see ROADMAP P2).
+
+## Status
+
+Version 1.2.0 (`plugin.yaml`). No automated tests or CI yet; the manual checklist below is the only verification (ROADMAP U1/U2). Screenshots: TODO, they need a running Agent Zero.
 
 ---
 
@@ -86,6 +106,10 @@ Memory-style queries automatically prefer recall when **Prefer project recall** 
 - [ ] No secrets committed to git
 
 ---
+
+## Contributing
+
+Issues and PRs welcome. Never commit `KURULTAI_API_KEY`; it belongs in Agent Zero Secrets. See [AGENTS.md](AGENTS.md).
 
 ## License
 
